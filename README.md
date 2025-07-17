@@ -34,8 +34,6 @@ rubrica.txt – File in cui vengono salvati i contatti (generato automaticamente
 
 README.md – Documentazione del progetto
 
-.gitignore – File per ignorare file temporanei e inutili
-
 LICENSE – Licenza MIT
 
 🧰 Requisiti
