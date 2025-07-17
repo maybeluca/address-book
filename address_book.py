@@ -13,6 +13,21 @@ def remcont(nome_del):
     else:
         print("Contatto non trovato.")
 
+def searchcont():
+    query = input("Inserisci il nome o parte del nome da cercare: ").strip().lower()
+    risultati = {nome: numero for nome, numero in rubrica.items() if query in nome}
+
+    if risultati:
+        print("\nContatti trovati:")
+        for nome, numero in risultati.items():
+            print(f"{nome} : {numero}")
+    else:
+        print("Nessun contatto corrisponde alla ricerca.")
+
+def updatecont(nome):
+    rubrica[nome]=input("inserisci il numero aggiornato")
+
+
 def carica_rubrica():
     rub = {}
     try:
@@ -34,7 +49,7 @@ rubrica = carica_rubrica()
 
 while True:
     try:
-        control = int(input("digitare 1 per aggiungere un contatto, 2 per eliminare un contatto, 3 per leggere la rubrica, 4 per uscire\n> "))
+        control = int(input("digitare 1 per aggiungere un contatto, 2 per eliminare un contatto, 3 per leggere la rubrica, 4 per cercare un contatto, 5 per aggiornare un numero, 6 per uscire\n> "))
     except ValueError:
         print("Inserisci un numero valido.")
         continue
@@ -58,8 +73,19 @@ while True:
 
 
         case 4:
+            searchcont()
+
+        case 5:
+            nome=input("inserisci il nome del contatto da aggiornare")
+            updatecont(nome)
+            print("il contatto è stato aggiornato")
+
+        case 6:
             print("Uscita dal programma.")
             break
+
+
+
 
         case _:
             print("Comando sconosciuto.")
