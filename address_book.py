@@ -1,34 +1,49 @@
-def addcont(nome, numero):
-    nome = nome.strip().lower()
-    rubrica[nome] = numero
-    salva_rubrica()
-    print("Il contatto è stato salvato.")
-
-def remcont(nome_del):
-    nome_del = nome_del.strip().lower()
-    if nome_del in rubrica:
-        rubrica.pop(nome_del)
-        salva_rubrica()
-        print("Il contatto è stato eliminato.")
+def add_contact(name, number):
+    name=name.strip().lower()
+    if name in address_book.keys():
+        address_book[name].append(number)
+        print(f"the number was added to the contact {name}\n")
     else:
-        print("Contatto non trovato.")
+        address_book[name]=[number]
+        print("contact created\n")
 
-def searchcont():
-    query = input("Inserisci il nome o parte del nome da cercare: ").strip().lower()
-    risultati = {nome: numero for nome, numero in rubrica.items() if query in nome}
-
-    if risultati:
-        print("\nContatti trovati:")
-        for nome, numero in risultati.items():
-            print(f"{nome} : {numero}")
+def eliminate_number(name, number):
+    name=name.strip().lower()
+    if name in address_book.keys():
+        if number in address_book[name]:
+            address_book[name].remove(number)
+            print("number eliminated\n")
+        else:
+            print("number not found\n")
     else:
-        print("Nessun contatto corrisponde alla ricerca.")
+        print("Contact not found\n")
 
-def updatecont(nome):
-    rubrica[nome]=input("inserisci il numero aggiornato")
+def eliminate_contact(name):
+    name=name.strip().lower()
+    if name in address_book.keys():
+        check=int(input(f"This will eliminate all the numbers associated to the contact {name}, press 1 to confirm\n"))
+        if check==1:
+            address_book.pop(name)
+            print("\ncontact eliminated\n")
+        else:
+            pass
+    else:
+        print("contact not found\n")
 
 
-def carica_rubrica():
+def search(query):
+    query=query.strip().lower()
+    for i in address_book.keys():
+        if query in i:
+            print(f"{i}\n")
+        else:
+            print(f"contact not found\n")
+    
+def read():
+    for contact, number in address_book:
+        print(f"{contact}: {number}\n")
+
+def load_address_book():
     rub = {}
     try:
         with open("rubrica.txt", "r") as file:
@@ -40,52 +55,17 @@ def carica_rubrica():
         pass
     return rub
 
-def salva_rubrica():
+def save_address_book():
     with open("rubrica.txt", "w") as file:
-        for nome, numero in rubrica.items():
+        for nome, numero in address_book.items():
             file.write(f"{nome} : {numero}\n") 
 
-rubrica = carica_rubrica()
-
-while True:
-    try:
-        control = int(input("digitare 1 per aggiungere un contatto, 2 per eliminare un contatto, 3 per leggere la rubrica, 4 per cercare un contatto, 5 per aggiornare un numero, 6 per uscire\n> "))
-    except ValueError:
-        print("Inserisci un numero valido.")
-        continue
-
-    match control:
+address_book=load_address_book()
+choice=int(input("choose an option:\n1. add contact\n2. eliminate contact\n3. eliminate number\n4. search contact\n5. see address book\n6. exit\n"))
+while choice!=6:
+    choice=int(input("choose an option:\n1. add contact\n2. eliminate contact\n3. eliminate number\n4. search contact\n5. exit\n"))
+    match choice:
         case 1:
-            nome = input("inserisci il nome: ")
-            numero = input("inserisci il numero: ")
-            addcont(nome, numero)
-
-        case 2:
-            nome_del = input("inserisci il nome del contatto da eliminare: ")
-            remcont(nome_del)
-
-        case 3:
-            if not rubrica:
-                print("Rubrica vuota.")
-            else:
-                for nome in sorted(rubrica):
-                    print(f"{nome} : {rubrica[nome]}")
-
-
-        case 4:
-            searchcont()
-
-        case 5:
-            nome=input("inserisci il nome del contatto da aggiornare")
-            updatecont(nome)
-            print("il contatto è stato aggiornato")
-
-        case 6:
-            print("Uscita dal programma.")
-            break
-
-
-
-
-        case _:
-            print("Comando sconosciuto.")
+            name=input("name: ")
+            number=input("number: ")
+            add_contact(name, number)
