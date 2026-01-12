@@ -6,6 +6,7 @@ def add_contact(name, number):
     else:
         address_book[name]=[number]
         print("contact created\n")
+    save_address_book()
 
 def eliminate_number(name, number):
     name=name.strip().lower()
@@ -17,6 +18,7 @@ def eliminate_number(name, number):
             print("number not found\n")
     else:
         print("Contact not found\n")
+    save_address_book()
 
 def eliminate_contact(name):
     name=name.strip().lower()
@@ -29,18 +31,21 @@ def eliminate_contact(name):
             pass
     else:
         print("contact not found\n")
-
+    save_address_book()
 
 def search(query):
+    found=False
     query=query.strip().lower()
     for i in address_book.keys():
         if query in i:
-            print(f"{i}\n")
-        else:
-            print(f"contact not found\n")
+            print(f"{i}: {address_book[i]}\n")
+            found=True
+        if found==False:
+            print("contact not found\n")      
     
 def read():
-    for contact, number in address_book:
+    load_address_book()
+    for contact, number in address_book.items():
         print(f"{contact}: {number}\n")
 
 def load_address_book():
@@ -61,11 +66,27 @@ def save_address_book():
             file.write(f"{nome} : {numero}\n") 
 
 address_book=load_address_book()
-choice=int(input("choose an option:\n1. add contact\n2. eliminate contact\n3. eliminate number\n4. search contact\n5. see address book\n6. exit\n"))
+choice=0
 while choice!=6:
-    choice=int(input("choose an option:\n1. add contact\n2. eliminate contact\n3. eliminate number\n4. search contact\n5. exit\n"))
+    choice=int(input("choose an option:\n1. add contact\n2. eliminate contact\n3. eliminate number\n4. search contact\n5. see address book\n6. exit\n"))
     match choice:
         case 1:
             name=input("name: ")
             number=input("number: ")
             add_contact(name, number)
+        case 2:
+            name=(input("name: "))
+            eliminate_contact(name)
+        case 3:
+            name=input("name: ")
+            number=input("number: ")
+            eliminate_number(name, number)
+        case 4:
+            query=input("insert the name or part of it: ")
+            search(query)
+        case 5:
+            read()
+        case 6:
+            pass
+        case _:
+            print("choose a valid option\n")
