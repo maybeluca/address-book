@@ -51,7 +51,7 @@ def read():
 def load_address_book():
     rub = {}
     try:
-        with open("rubrica.txt", "r") as file:
+        with open("address_book.txt", "r") as file:
             for line in file:
                 if ":" in line:
                     nome, numero = line.strip().split(":", 1)
@@ -61,7 +61,7 @@ def load_address_book():
     return rub
 
 def save_address_book():
-    with open("rubrica.txt", "w") as file:
+    with open("address_book.txt", "w") as file:
         for nome, numero in address_book.items():
             file.write(f"{nome} : {numero}\n") 
 
