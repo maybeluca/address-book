@@ -1,46 +1,51 @@
-# 📒 Rubrica Contatti (Python)
+Address Book CLI
 
-Questo è un semplice programma da riga di comando in Python per gestire una rubrica di contatti. I contatti vengono salvati nel file `rubrica.txt`.
+A simple and lightweight command-line address book application written in Python.
+It allows users to manage contacts with multiple phone numbers and stores data persistently in a local file.
 
-## ✨ Funzionalità
+Features:
 
-- ✅ Aggiunta di nuovi contatti
-- ❌ Rimozione contatti esistenti
-- 📋 Visualizzazione della rubrica in ordine alfabetico
-- 💾 Salvataggio automatico su file
+   Add a new contact
 
-## ▶️ Utilizzo
+   Add multiple phone numbers to an existing contact
 
-1. **Clona il repository**:
-   ```bash
-   git clone https://github.com/tuo-username/rubrica-python.git
-   cd rubrica-python
-2. **Avvia il programma**:
-     python rubrica.py
+   Remove a specific phone number from a contact
 
-🧾 Esempio di utilizzo:
+   Delete an entire contact with all associated numbers
 
-  digitare 1 per aggiungere un contatto, 2 per eliminare un contatto, 3 per leggere la rubrica, 4 per uscire
-  > 1
-  inserisci il nome: Luca
-  inserisci il numero: 3331234567
-  Il contatto è stato salvato.
+   Search contacts by full or partial name
 
+   Display the complete address book
 
-📁 File
-rubrica.py – Il codice principale della rubrica
+   Automatic saving and loading of data
 
-rubrica.txt – File in cui vengono salvati i contatti (generato automaticamente)
+Requirements:
 
-README.md – Documentazione del progetto
+   Python 3.10 or higher
 
-LICENSE – Licenza MIT
+Installation:
 
-🧰 Requisiti
-Python 3.7 o superiore
+Clone or download the repository and navigate to the project directory.
 
-Nessuna libreria esterna necessaria
+Usage:
 
-📄 Licenza
-Distribuito con licenza MIT. Vedi il file LICENSE per i dettagli.
+Run the application from the terminal:
+python main.py
 
+Notes:
+
+The program runs entirely in the terminal
+
+The screen is cleared after most operations to keep the interface readable
+
+Phone numbers are stored as strings to allow flexible formatting
+
+Possible Extensions
+
+Add input validation for menu choices and phone numbers
+
+Use JSON instead of a text file for better data structure
+
+Improve the user interface with colored output
+
+Add sorting options for contacts
